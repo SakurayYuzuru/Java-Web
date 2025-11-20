@@ -120,6 +120,31 @@ export const User = defineStore('user', {
         },
 
         /**
+         * 用户添加逻辑
+         * @param {string} username - 用户名
+         * @param {string} password - 密码
+         * @param {string} email - 邮箱
+         */
+        async add(username, password, email) {
+            this.isLoading = true;
+            try {
+                // POST /api/user/add
+                const result = await api.post('/user/add', {
+                    username: username,
+                    password: password,
+                    email: email
+                    // 实际中可能需要更多字段如 email, role
+                });
+                
+                this.isLoading = false;
+                return result; // 返回注册结果信息
+            } catch (error) {
+                this.isLoading = false;
+                throw error;
+            }
+        },
+
+        /**
          * 1. 【新增】分页查询用户列表逻辑
          * @param {number} page - 页码 (从 0 或 1 开始，取决于后端约定)
          * @param {number} size - 每页条目数

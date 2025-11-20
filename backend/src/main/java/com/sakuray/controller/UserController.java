@@ -13,6 +13,7 @@ import com.sakuray.entity.User;
 import com.sakuray.dto.page.PageRequestDTO;
 import com.sakuray.dto.user.UpdateDTO;
 import com.sakuray.dto.user.DeleteDTO;
+import com.sakuray.dto.user.AddDTO;
 import org.springframework.data.domain.Page;
 
 @RestController
@@ -45,5 +46,10 @@ public class UserController {
     @PostMapping("/delete")
     public String deleteUser(@RequestBody DeleteDTO dto) {
         return service.deleteUser(dto.getId());
+    }
+
+    @PostMapping("/add")
+    public String addUser(@RequestBody AddDTO dto) {
+        return service.AddUser(dto);
     }
 }

@@ -3,6 +3,7 @@ package com.sakuray.service.impl;
 import com.sakuray.dto.user.LoginDTO;
 import com.sakuray.dto.user.RegisterDTO;
 import com.sakuray.dto.user.UpdateDTO;
+import com.sakuray.dto.user.AddDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -75,5 +76,18 @@ public class UserServiceImpl implements UserService {
         repo.delete(user);
         
         return "删除成功";
+    }
+
+    @Override
+    public String AddUser(AddDTO dto) {
+        User exist = repo.findByUsername(dto.getUsername());
+        if (exist != null) {
+            return "用户名已存在";
+        }
+
+        User user = new User(dto.getUsername(), dto.getPassword(), dto.getEmail());
+        repo.save(user);
+
+        return "添加成功";
     }
 }

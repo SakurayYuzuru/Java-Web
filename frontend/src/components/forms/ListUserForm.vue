@@ -1,7 +1,5 @@
 <template>
   <div class="user-list-container">
-    <h1 class="page-title">用户信息列表</h1>
-    
     <!-- 加载状态指示器 -->
     <div v-if="userStore.isLoading" class="loading-overlay">
       <div class="spinner"></div>

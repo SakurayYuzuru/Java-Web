@@ -19,6 +19,15 @@
       required
     />
 
+    <label class="label">邮箱</label>
+    <input
+      v-model="email"
+      class="input"
+      type="email"
+      placeholder="请输入邮箱"
+      required
+    />
+
     <button class="button" :disabled="store.isLoading">
       {{ store.isLoading ? "提交中…" : "添加用户" }}
     </button>
@@ -36,6 +45,7 @@ const store = User();
 
 const name = ref("");
 const password = ref("");
+const email = ref("");
 const message = ref("");
 
 /** 添加用户逻辑 */
@@ -43,11 +53,12 @@ async function handleSubmit() {
   message.value = "";
 
   try {
-    await store.register(name.value, password.value);
+    await store.add(name.value, password.value, email.value);
     message.value = "用户添加成功";
 
     name.value = "";
     password.value = "";
+    email.value = "";
   } catch (err) {
     message.value = "添加失败，请检查后端日志或接口格式";
   }
