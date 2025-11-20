@@ -117,6 +117,80 @@ export const User = defineStore('user', {
                     this.logout();
                 }
             }
+        },
+
+        /**
+         * 1. 【新增】分页查询用户列表逻辑
+         * @param {number} page - 页码 (从 0 或 1 开始，取决于后端约定)
+         * @param {number} size - 每页条目数
+         * @returns {Promise<Page<User>>} - 返回后端的分页结果对象
+         */
+        async queryUsers(page, size) {
+            this.isLoading = true;
+            try {
+                // POST /api/user/page
+                const response = await api.post('/user/page', { 
+                    page: page, 
+                    size: size 
+                });
+                
+                this.isLoading = false;
+                // 假设后端直接返回 Page<User> 结构
+                return response.data; 
+            } catch (error) {
+                this.isLoading = false;
+                console.error('查询用户列表失败:', error);
+                throw error;
+            }
+        },
+        
+        /**
+         * 2. 【新增】更新用户信息逻辑
+         * @param {number} id - 待更新用户的 ID
+         * @param {object} updateData - 包含 username, email 等需要更新的字段 (对应 UpdateDTO)
+         * @returns {Promise<string>} - 返回后端的操作结果信息
+         */
+        async updateUser(id, updateData) {
+            this.isLoading = true;
+            try {
+                // POST /api/user/update
+                // updateData 必须包含 id，以匹配 updateUser(dto.getId(), dto) 的逻辑
+                const result = await api.post('/user/update', { 
+                    id: id,
+                    username: updateData.username,
+                    password: updateData.password,
+                    email: updateData.email,
+                });
+
+                this.isLoading = false;
+                return result.data; // 返回 '更新成功' 等消息
+            } catch (error) {
+                this.isLoading = false;
+                console.error('更新用户失败:', error);
+                throw error;
+            }
+        },
+
+        /**
+         * 3. 【新增】删除用户逻辑
+         * @param {number} id - 待删除用户的 ID
+         * @returns {Promise<string>} - 返回后端的操作结果信息
+         */
+        async deleteUser(id) {
+            this.isLoading = true;
+            try {
+                // POST /api/user/delete
+                const result = await api.post('/user/delete', { 
+                    id: id 
+                });
+
+                this.isLoading = false;
+                return result.data; // 返回 '删除成功' 等消息
+            } catch (error) {
+                this.isLoading = false;
+                console.error('删除用户失败:', error);
+                throw error;
+            }
         }
     }
 });

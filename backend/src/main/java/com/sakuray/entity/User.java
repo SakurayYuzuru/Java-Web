@@ -21,12 +21,21 @@ public class User {
     @Column(nullable = false)
     private String password; // 存储的是哈希后的密码
 
+    @Column(nullable = true)
+    private String email;
+
     // 默认构造函数是 JPA 规范必需的
     public User() {}
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
     }
 
     // Getters and Setters (ID 的 Getter/Setter 也是必需的)
@@ -52,5 +61,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

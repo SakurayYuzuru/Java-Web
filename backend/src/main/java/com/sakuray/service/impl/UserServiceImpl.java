@@ -2,6 +2,10 @@ package com.sakuray.service.impl;
 
 import com.sakuray.dto.user.LoginDTO;
 import com.sakuray.dto.user.RegisterDTO;
+import com.sakuray.dto.user.UpdateDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import com.sakuray.entity.User;
 import com.sakuray.repo.UserRepo;
 import com.sakuray.service.UserService;
@@ -39,5 +43,37 @@ public class UserServiceImpl implements UserService {
         }
 
         return "登录成功";
+    }
+
+    @Override
+    public Page<User> getUserByPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return repo.findAll(pageable);
+    }
+
+    @Override
+    public String updateUser(Long id, UpdateDTO dto) {
+        User user = repo.findById(id).orElse(null);
+        if (user == null) {
+            return "用户不存在";
+        }
+
+        user.setUsername(dto.getUsername());
+        user.setPassword(dto.getPassword());
+        user.setEmail(dto.getEmail());
+        repo.save(user);
+
+        return "更新成功";
+    }
+
+    @Override
+    public String deleteUser(Long id) {
+        User user = repo.findById(id).orElse(null);
+        if (user == null) {
+            return "用户不存在";
+        }
+        repo.delete(user);
+        
+        return "删除成功";
     }
 }
