@@ -63,13 +63,13 @@
 
 <script setup>
 /**
- * src/views/Auth/Register.vue
+ * src/views/Register.vue
  * * 注册视图，负责 UI 交互和调用 Pinia Store 中的注册逻辑。
  */
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 // 导入 Pinia Store
-import { User } from '@/stores/user/Auth'; 
+import { User } from '@/stores/user'; 
 
 // --- Pinia / 路由实例 ---
 const userStore = User(); 

@@ -58,7 +58,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 // 确保这里的导入路径正确
-import { User } from '@/stores/user/Auth'; 
+import { User } from '@/stores/user'; 
 
 // --- Pinia / 路由实例 ---
 const userStore = User(); 

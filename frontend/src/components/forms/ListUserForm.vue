@@ -109,7 +109,7 @@
 <script setup>
 import { ref, onMounted, reactive } from 'vue';
 // 导入 Pinia Store，假设路径正确
-import { User } from '@/stores/user/Auth'; 
+import { User } from '@/stores/user'; 
 
 const userStore = User();
 

@@ -39,7 +39,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { User } from "@/stores/user/Auth.js";
+import { User } from "@/stores/user.js";
 
 const store = User();
 

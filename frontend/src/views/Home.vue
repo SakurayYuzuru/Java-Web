@@ -45,8 +45,8 @@
 <script setup>
 import { ref, computed } from 'vue';
 // 导入实际的用户添加组件 (请确保路径正确)
-import AddUser from '@/views/AddUser.vue';
-import ListUser from '@/views/ListUser.vue';
+import AddUser from '@/views/user/AddUser.vue';
+import ListUser from '@/views/user/ListUser.vue';
 import Dashboard from '@/views/Dashboard.vue';
 const AddScore = { template: '<div class="p-4 text-xl font-bold text-blue-600">成绩录入视图 (待实现)</div>' };
 const ListScore = { template: '<div class="p-4 text-xl font-bold text-blue-600">成绩信息列表视图 (待实现)</div>' };

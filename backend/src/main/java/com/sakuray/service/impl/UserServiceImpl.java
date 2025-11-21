@@ -1,21 +1,21 @@
 package com.sakuray.service.impl;
 
-import com.sakuray.dto.user.LoginDTO;
-import com.sakuray.dto.user.RegisterDTO;
-import com.sakuray.dto.user.UpdateDTO;
-import com.sakuray.dto.user.AddDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.sakuray.dto.user.AddDTO;
+import com.sakuray.dto.user.LoginDTO;
+import com.sakuray.dto.user.RegisterDTO;
+import com.sakuray.dto.user.UpdateDTO;
 import com.sakuray.entity.User;
 import com.sakuray.repo.UserRepo;
 import com.sakuray.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-
     @Autowired
     private UserRepo repo;
 
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String updateUser(Long id, UpdateDTO dto) {
+    public String update(Long id, UpdateDTO dto) {
         User user = repo.findById(id).orElse(null);
         if (user == null) {
             return "用户不存在";
@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String deleteUser(Long id) {
+    public String delete(Long id) {
         User user = repo.findById(id).orElse(null);
         if (user == null) {
             return "用户不存在";
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String AddUser(AddDTO dto) {
+    public String add(AddDTO dto) {
         User exist = repo.findByUsername(dto.getUsername());
         if (exist != null) {
             return "用户名已存在";
