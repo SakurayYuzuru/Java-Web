@@ -51,11 +51,12 @@ export const Student = defineStore('student', {
         async queryStudents(page, size) {
             this.isLoading = true;
             try {
+                // *** 修正点：防御性检查，确保 size 大于 0 ***
+                const effectiveSize = (size && size > 0) ? size : 10;
+                
                 const response = await api.post('/student/page', {
-                    params: {
-                        page: page,
-                        size: size
-                    }
+                    page: page, 
+                    size: effectiveSize  // 使用有效 size
                 });
 
                 this.isLoading = false;
@@ -70,14 +71,14 @@ export const Student = defineStore('student', {
         async update(id, updateData) {
             this.isLoading = true;
             try {
-                const result = await api.post('/user/update', {
+                const result = await api.post('/student/update', { 
                     id: id,
                     studentName: updateData.name,
                     studentId: updateData.id,
                     school: updateData.school, 
                     className: updateData.classname,
                     chinese: updateData.chinese,
-                    math: math,
+                    math: updateData.math,
                     english: updateData.english,
                     physics: updateData.physics,
                     chemistry: updateData.chemistry
@@ -111,10 +112,13 @@ export const Student = defineStore('student', {
         async search(name, page, size) {
             this.isLoading = true;
             try {
+                // *** 修正点：防御性检查，确保 size 大于 0 ***
+                const effectiveSize = (size && size > 0) ? size : 10;
+                
                 const response = await api.post('student/search', {
                     name: name,
                     page: page,
-                    size: size
+                    size: effectiveSize // 使用有效 size
                 });
 
                 this.isLoading = false;

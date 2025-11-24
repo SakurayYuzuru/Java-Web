@@ -18,6 +18,8 @@
           <li><a @click="currentPageKey='listUser'" :class="{ active: currentPageKey === 'listUser' }">用户信息</a></li>
           <li><a @click="currentPageKey='addScore'" :class="{ active: currentPageKey === 'addScore' }">成绩录入</a></li>
           <li><a @click="currentPageKey='listScore'" :class="{ active: currentPageKey === 'listScore' }">成绩信息</a></li>
+          <li><a @click="currentPageKey='uploadFile'" :class="{ active: currentPageKey === 'uploadFile' }">文件上传</a></li>
+          <li><a @click="currentPageKey='listFile'" :class="{ active: currentPageKey === 'listFile' }">文件下载</a></li>
         </ul>
       </aside>
 
@@ -48,8 +50,10 @@ import { ref, computed } from 'vue';
 import AddUser from '@/views/user/AddUser.vue';
 import ListUser from '@/views/user/ListUser.vue';
 import Dashboard from '@/views/Dashboard.vue';
-const AddScore = { template: '<div class="p-4 text-xl font-bold text-blue-600">成绩录入视图 (待实现)</div>' };
-const ListScore = { template: '<div class="p-4 text-xl font-bold text-blue-600">成绩信息列表视图 (待实现)</div>' };
+import AddScore from '@/views/student/AddStudent.vue'
+import ListScore from '@/views/student/ListStudent.vue'
+// import UploadFile from '@/views/file/UploadFile.vue';
+// import ListFile from '@/views/file/ListFile.vue';
 // ----------------------------------------------------------------------
 
 // 1. 定义响应式状态：当前选中的页面 (默认首页改为 'dashboard')
@@ -62,6 +66,8 @@ const componentMap = {
   listUser: ListUser, 
   addScore: AddScore,
   listScore: ListScore, 
+  // uploadFile: UploadFile,
+  // listFile: ListFile
 };
 
 // 3. 计算属性：根据 key 返回要渲染的组件对象

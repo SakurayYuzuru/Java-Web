@@ -67,13 +67,21 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Page<Student> getStudentByPage(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        // 【修正】确保 size 不小于 1，如果小于 1，使用默认值 10
+        int safeSize = (size < 1) ? 10 : size;
+        
+        // 注意：PageRequest.of() 中的 page 参数是 0-based 索引。
+        Pageable pageable = PageRequest.of(page, safeSize);
         return repo.findAll(pageable);
     }
     
     @Override
     public Page<Student> getStudentByName(String name, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size);
+        // 【修正】确保 size 不小于 1，如果小于 1，使用默认值 10
+        int safeSize = (size < 1) ? 10 : size;
+
+        // 注意：PageRequest.of() 中的 page 参数是 0-based 索引。
+        Pageable pageable = PageRequest.of(page, safeSize);
         return repo.findByStudentNameContaining(name, pageable);
     }
 }

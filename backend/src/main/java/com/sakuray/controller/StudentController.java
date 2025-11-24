@@ -42,7 +42,7 @@ public class StudentController {
     }
 
     @PostMapping("/search")
-    public Page<Student> getStudentByName(@RequestBody SearchDTO dto, @RequestBody PageRequestDTO page) {
-        return service.getStudentByName(dto.getName(), page.getPage(), page.getSize());
+    public Page<Student> getStudentByName(@RequestBody SearchDTO dto) {
+        return service.getStudentByName(dto.getName(), dto.getPage(), dto.getSize());
     }
 }
