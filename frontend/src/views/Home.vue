@@ -52,8 +52,8 @@ import ListUser from '@/views/user/ListUser.vue';
 import Dashboard from '@/views/Dashboard.vue';
 import AddScore from '@/views/student/AddStudent.vue'
 import ListScore from '@/views/student/ListStudent.vue'
-// import UploadFile from '@/views/file/UploadFile.vue';
-// import ListFile from '@/views/file/ListFile.vue';
+import UploadFile from '@/views/file/UploadFile.vue';
+import ListFile from '@/views/file/ListFile.vue';
 // ----------------------------------------------------------------------
 
 // 1. 定义响应式状态：当前选中的页面 (默认首页改为 'dashboard')
@@ -66,8 +66,8 @@ const componentMap = {
   listUser: ListUser, 
   addScore: AddScore,
   listScore: ListScore, 
-  // uploadFile: UploadFile,
-  // listFile: ListFile
+  uploadFile: UploadFile,
+  listFile: ListFile
 };
 
 // 3. 计算属性：根据 key 返回要渲染的组件对象
